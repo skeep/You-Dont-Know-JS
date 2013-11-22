@@ -73,13 +73,13 @@ let (a = 2) {
 console.log(a); // ReferenceError
 ```
 
-Instead of implicitly hijacking an existing block, the let-statement creates an explicit block for its scope binding. Not only does the explicit block stand out more, and perhaps fair more robustly in code refactoring, it produces somewhat cleaner code by, grammatically, forcing all the declarations to the top of the block. This makes it easier to look at any block and know what's scoped to it and not.
+Instead of implicitly hijacking an existing block, the let-statement creates an explicit block for its scope binding. Not only does the explicit block stand out more, and perhaps fare more robustly in code refactoring, it produces somewhat cleaner code by, grammatically, forcing all the declarations to the top of the block. This makes it easier to look at any block and know what's scoped to it and not.
 
 As a pattern, it mirrors the approach many people take in function-scoping when they manually move/hoist all their `var` declarations to the top of the function. The let-statement puts them there at the top of the block by intent, and if you don't use `let` declarations strewn throughout, your block-scoping declarations are somewhat easier to identify and maintain.
 
 But, there's a problem. The let-statement form is not included in ES6. Neither does the official Traceur compiler accept that form of code.
 
-Tools are meant to solve our problems. So, I built a tool called "let-er" [^note-let-er] to address just this issue. *let-er* is a build-step code transpiler, but its only task is to find let-statement forms and transpile them. It will leave alone any of the rest of your code, including any let-declarations. You can safely use *let-er* as the first ES6 transpiler step, and then pass your code through something like Traceur if necessary.
+Tools are meant to solve our problems. So, I built a tool called "let-er" [^note-let_er] to address just this issue. *let-er* is a build-step code transpiler, but its only task is to find let-statement forms and transpile them. It will leave alone any of the rest of your code, including any let-declarations. You can safely use *let-er* as the first ES6 transpiler step, and then pass your code through something like Traceur if necessary.
 
 Moreover, *let-er* has a configuration flag `--es6`, which when turned on, changes the kind of code produced. Instead of the `try/catch` ES3 polyfill hack, *let-er* would take our snippet and produce the fully ES6-compliant, non-hacky:
 
@@ -108,4 +108,4 @@ The question really becomes: do you want block-scoping, or not. If you do, these
 
 [^note-traceur]: [Google Traceur](http://traceur-compiler.googlecode.com/git/demo/repl.html)
 
-[^note-let-er]: [let-er](https://github.com/getify/let-er)
+[^note-let_er]: [let-er](https://github.com/getify/let-er)
